@@ -392,7 +392,7 @@
 #define ADJ_SLEW_RATE(p) (((p) & ~GPIO_SPEED_MASK) | (GPIO_SPEED_2MHz))
 
 #define GPIO_SPI1_MISO   GPIO_SPI1_MISO_1               /* PA6  */
-#define GPIO_SPI1_MOSI   GPIO_SPI1_MOSI_1               /* PA7  */
+#define GPIO_SPI1_MOSI   GPIO_SPI1_MOSI_3               /* PD7  */
 #define GPIO_SPI1_SCK    ADJ_SLEW_RATE(GPIO_SPI1_SCK_1) /* PA5 */
 
 #define GPIO_SPI2_MISO   GPIO_SPI2_MISO_2               /* PC2  */
