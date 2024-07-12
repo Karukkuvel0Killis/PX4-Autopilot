@@ -14,6 +14,9 @@ icm20948 -s -b 1 -R 180 start
 
 
 # Internal baro
-dps310 -I start -a 118
+# ms5611 -I start -a 0x77
+# bmm150 -I start -a 0x13
 
-ist8310 -I -R 2 start
+
+ms5611 -I -b 1 -a 0x77 start
+bmm150 -I -b 1 -a 0x13 start

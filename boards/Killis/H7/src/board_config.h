@@ -127,6 +127,11 @@
 #define RC_SERIAL_PORT          "/dev/ttyS4"
 #define BOARD_SUPPORTS_RC_SERIAL_PORT_OUTPUT
 
+/* PWM input driver. Use FMU AUX5 pins attached to timer4 channel 2 */
+
+#define PWMIN_TIMER                       5
+#define PWMIN_TIMER_CHANNEL    /* T5C1 */ 1
+#define GPIO_PWM_IN            /* PA0  */ GPIO_TIM5_CH1IN
 /* SD Card */
 #define SDIO_SLOTNO             0  /* Only one slot */
 #define SDIO_MINOR              0
