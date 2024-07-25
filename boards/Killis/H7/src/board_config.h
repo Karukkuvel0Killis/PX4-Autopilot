@@ -109,16 +109,13 @@
 
 #define BOARD_HAS_PWM  DIRECT_PWM_OUTPUT_CHANNELS
 
-#define GPIO_TONE_ALARM_IDLE    /* PC13 */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTG|GPIO_PIN6)
-#define GPIO_TONE_ALARM_GPIO    /* PC13 */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_SET|GPIO_PORTG|GPIO_PIN6)
-
 
 /* USB OTG FS
  *
  * PA8  OTG_FS_VBUS VBUS sensing
  */
 
-#define GPIO_OTGFS_VBUS         /* PA8 */ (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTA|GPIO_PIN8)
+#define GPIO_OTGFS_VBUS         /* PA8 */ (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTA|GPIO_PIN9)
 
 
 /* High-resolution timer */
@@ -127,14 +124,9 @@
 
 
 /* RC Serial port */
-#define RC_SERIAL_PORT          "/dev/ttyS5"
+#define RC_SERIAL_PORT          "/dev/ttyS4"
 #define BOARD_SUPPORTS_RC_SERIAL_PORT_OUTPUT
 
-/* PWM input driver. Use FMU AUX5 pins attached to timer4 channel 2 */
-
-#define PWMIN_TIMER                       5
-#define PWMIN_TIMER_CHANNEL    /* T5C1 */ 1
-#define GPIO_PWM_IN            /* PA0  */ GPIO_TIM5_CH1IN_1
 /* SD Card */
 #define SDIO_SLOTNO             0  /* Only one slot */
 #define SDIO_MINOR              0
@@ -148,7 +140,6 @@
 #define PX4_GPIO_INIT_LIST { \
 		PX4_ADC_GPIO, \
 		GPIO_CAN1_TX, \
-		GPIO_TONE_ALARM_IDLE,             \
 		GPIO_CAN1_RX, \
 	}
 

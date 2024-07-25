@@ -353,8 +353,8 @@
 
 /* Alternate function pin selections ************************************************/
 
-#define GPIO_USART1_RX   GPIO_USART1_RX_2   /* PA10 */
-#define GPIO_USART1_TX   GPIO_USART1_TX_2   /* PA9  */
+#define GPIO_USART1_RX   GPIO_USART1_RX_1   /* PB15 */
+#define GPIO_USART1_TX   GPIO_USART1_TX_1   /* PB14  */
 
 #define GPIO_USART2_RX   GPIO_USART2_RX_1   /* PA3  */
 #define GPIO_USART2_TX   GPIO_USART2_TX_1   /* PA2  */
@@ -362,7 +362,7 @@
 #define GPIO_USART3_RX   GPIO_USART3_RX_3   /* PD9  */
 #define GPIO_USART3_TX   GPIO_USART3_TX_3   /* PD8  */
 
-#define GPIO_UART4_RX    GPIO_UART4_RX_5    /* PD0  */
+#define GPIO_UART4_RX    GPIO_UART4_RX_5    /* PD0 */
 #define GPIO_UART4_TX    GPIO_UART4_TX_5    /* PD1  */
 
 #define GPIO_USART6_RX   GPIO_USART6_RX_1   /* PC7  */
