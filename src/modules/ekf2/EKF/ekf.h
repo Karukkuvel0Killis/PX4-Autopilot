@@ -396,7 +396,8 @@ public:
 
 	float getHeadingInnovationTestRatio() const;
 
-	float getVelocityInnovationTestRatio() const;
+	float getHorizontalVelocityInnovationTestRatio() const;
+	float getVerticalVelocityInnovationTestRatio() const;
 
 	float getHorizontalPositionInnovationTestRatio() const;
 	float getVerticalPositionInnovationTestRatio() const;
@@ -525,6 +526,18 @@ public:
 	bool resetGlobalPosToExternalObservation(double lat_deg, double lon_deg, float accuracy,
 			uint64_t timestamp_observation);
 
+	/**
+	* @brief Resets the wind states to an external observation
+	*
+	* @param wind_speed The wind speed in m/s
+	* @param wind_direction The azimuth (from true north) to where the wind is heading in radians
+	* @param wind_speed_accuracy The 1 sigma accuracy of the wind speed estimate in m/s
+	* @param wind_direction_accuracy The 1 sigma accuracy of the wind direction estimate in radians
+	*/
+	void resetWindToExternalObservation(float wind_speed, float wind_direction, float wind_speed_accuracy,
+					    float wind_direction_accuracy);
+	bool _external_wind_init{false};
+
 	void updateParameters();
 
 	friend class AuxGlobalPosition;
@@ -585,6 +598,7 @@ private:
 	uint64_t _time_last_hor_vel_fuse{0};	///< time the last fusion of horizontal velocity measurements was performed (uSec)
 	uint64_t _time_last_ver_vel_fuse{0};	///< time the last fusion of verticalvelocity measurements was performed (uSec)
 	uint64_t _time_last_heading_fuse{0};
+	uint64_t _time_last_terrain_fuse{0};
 
 	Vector3f _last_known_pos{};		///< last known local position vector (m)
 
@@ -780,7 +794,7 @@ private:
 
 	// fuse synthetic zero sideslip measurement
 	void updateSideslip(estimator_aid_source1d_s &_aid_src_sideslip) const;
-	void fuseSideslip(estimator_aid_source1d_s &_aid_src_sideslip);
+	bool fuseSideslip(estimator_aid_source1d_s &_aid_src_sideslip);
 #endif // CONFIG_EKF2_SIDESLIP
 
 #if defined(CONFIG_EKF2_DRAG_FUSION)
@@ -805,6 +819,8 @@ private:
 
 	void resetHorizontalPositionTo(const Vector2f &new_horz_pos, const Vector2f &new_horz_pos_var);
 	void resetHorizontalPositionTo(const Vector2f &new_horz_pos, const float pos_var = NAN) { resetHorizontalPositionTo(new_horz_pos, Vector2f(pos_var, pos_var)); }
+
+	void resetWindTo(const Vector2f &wind, const Vector2f &wind_var);
 
 	bool isHeightResetRequired() const;
 
@@ -1093,8 +1109,6 @@ private:
 #endif // CONFIG_EKF2_MAGNETOMETER
 
 #if defined(CONFIG_EKF2_WIND)
-	// perform a reset of the wind states and related covariances
-	void resetWind();
 	void resetWindCov();
 	void resetWindToZero();
 #endif // CONFIG_EKF2_WIND
