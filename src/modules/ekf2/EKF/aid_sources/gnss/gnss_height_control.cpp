@@ -87,7 +87,7 @@ void Ekf::controlGnssHeightFusion(const gnssSample &gps_sample)
 		// determine if we should use height aiding
 		const bool continuing_conditions_passing = (_params.gnss_ctrl & static_cast<int32_t>(GnssCtrl::VPOS))
 				&& measurement_valid
-				&& _NED_origin_initialised
+				&& _pos_ref.isInitialized()
 				&& _gps_checks_passed;
 
 		const bool starting_conditions_passing = continuing_conditions_passing
@@ -100,12 +100,12 @@ void Ekf::controlGnssHeightFusion(const gnssSample &gps_sample)
 
 				const bool is_fusion_failing = isTimedOut(aid_src.time_last_fuse, _params.hgt_fusion_timeout_max);
 
-				if (isHeightResetRequired()) {
+				if (isHeightResetRequired() && (_height_sensor_ref == HeightSensor::GNSS)) {
 					// All height sources are failing
 					ECL_WARN("%s height fusion reset required, all height sources failing", HGT_SRC_NAME);
 
 					_information_events.flags.reset_hgt_to_gps = true;
-					resetVerticalPositionTo(-(measurement - bias_est.getBias()), measurement_var);
+					resetVerticalPositionTo(aid_src.observation, measurement_var);
 					bias_est.setBias(_state.pos(2) + measurement);
 
 					aid_src.time_last_fuse = _time_delayed_us;
