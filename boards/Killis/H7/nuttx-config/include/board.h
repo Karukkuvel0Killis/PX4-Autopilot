@@ -1,5 +1,5 @@
 /************************************************************************************
- * nuttx-configs/px4_fmu-v6u/include/board.h
+ * nuttx-configs/Killis_H7/include/board.h
  *
  *   Copyright (C) 2016-2019 Gregory Nutt. All rights reserved.
  *   Authors: David Sidrane <david.sidrane@nscdg.com>
@@ -32,9 +32,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  *
  ************************************************************************************/
-#ifndef __NUTTX_CONFIG_MICOAIR743_INCLUDE_BOARD_H
-#define __NUTTX_CONFIG_MICOAIR743_INCLUDE_BOARD_H
-
+#pragma once
 /************************************************************************************
  * Included Files
  ************************************************************************************/
@@ -399,7 +397,9 @@
 #define GPIO_SPI2_MOSI   GPIO_SPI2_MOSI_3               /* PC3 */
 #define GPIO_SPI2_SCK    ADJ_SLEW_RATE(GPIO_SPI2_SCK_5) /* PD3  */
 
-
+#define GPIO_SPI3_MISO   GPIO_SPI3_MISO_1               /* PB4  */
+#define GPIO_SPI3_MOSI   GPIO_SPI3_MOSI_3               /* PB2 */
+#define GPIO_SPI3_SCK    ADJ_SLEW_RATE(GPIO_SPI3_SCK_1) /* PB3  */
 
 /* I2C
  *
@@ -423,4 +423,3 @@
 # define PROBE(n,s)
 # define PROBE_MARK(n)
 
-#endif  /*__NUTTX_CONFIG_MICOAIR743_INCLUDE_BOARD_H  */
