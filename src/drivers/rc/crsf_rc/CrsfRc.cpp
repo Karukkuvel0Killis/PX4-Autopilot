@@ -97,6 +97,11 @@ int CrsfRc::task_spawn(int argc, char *argv[])
 		return PX4_ERROR;
 	}
 
+	if (board_rc_conflicting(device_name)) {
+		PX4_INFO("unable to start, conflict with PX4IO on %s", device_name);
+		return PX4_ERROR;
+	}
+
 	CrsfRc *instance = new CrsfRc(device_name);
 
 	if (instance == nullptr) {
@@ -526,6 +531,7 @@ This module parses the CRSF RC uplink protocol and generates CRSF downlink telem
 )DESCR_STR");
 
 	PRINT_MODULE_USAGE_NAME("crsf_rc", "driver");
+	PRINT_MODULE_USAGE_SUBCATEGORY("radio_control");
 	PRINT_MODULE_USAGE_COMMAND("start");
 	PRINT_MODULE_USAGE_PARAM_STRING('d', "/dev/ttyS3", "<file:dev>", "RC device", true);
 

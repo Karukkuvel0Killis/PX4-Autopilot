@@ -37,7 +37,6 @@ cmake_policy(SET CMP0057 NEW)
 include(px4_list_make_absolute)
 
 set(msg_files
-	AckermannVelocitySetpoint.msg
 	ActionRequest.msg
 	ActuatorArmed.msg
 	ActuatorControlsStatus.msg
@@ -48,6 +47,7 @@ set(msg_files
 	Airspeed.msg
 	AirspeedWind.msg
 	AutotuneAttitudeControlStatus.msg
+	BatteryInfo.msg
 	ButtonEvent.msg
 	CameraCapture.msg
 	CameraStatus.msg
@@ -66,6 +66,7 @@ set(msg_files
 	DifferentialPressure.msg
 	DistanceSensor.msg
 	DistanceSensorModeChangeRequest.msg
+	DronecanNodeStatus.msg
 	Ekf2Timestamps.msg
 	EscReport.msg
 	EscStatus.msg
@@ -82,7 +83,7 @@ set(msg_files
 	EstimatorStates.msg
 	EstimatorStatus.msg
 	EstimatorStatusFlags.msg
-	Event.msg
+	versioned/Event.msg
 	FigureEightStatus.msg
 	FailsafeFlags.msg
 	FailureDetectorStatus.msg
@@ -91,6 +92,9 @@ set(msg_files
 	FollowTargetEstimator.msg
 	FollowTargetStatus.msg
 	FuelTankStatus.msg
+	FixedWingLateralGuidanceStatus.msg
+	FixedWingLateralStatus.msg
+	FixedWingRunwayControl.msg
 	GeneratorStatus.msg
 	GeofenceResult.msg
 	GeofenceStatus.msg
@@ -137,8 +141,8 @@ set(msg_files
 	MountOrientation.msg
 	NavigatorMissionItem.msg
 	NavigatorStatus.msg
+	NeuralControl.msg
 	NormalizedUnsignedSetpoint.msg
-	NpfgStatus.msg
 	ObstacleDistance.msg
 	OffboardControlMode.msg
 	OnboardComputerStatus.msg
@@ -179,6 +183,7 @@ set(msg_files
 	RoverRateStatus.msg
 	RoverSteeringSetpoint.msg
 	RoverThrottleSetpoint.msg
+	RoverVelocitySetpoint.msg
 	RoverVelocityStatus.msg
 	Rpm.msg
 	RtlStatus.msg
@@ -232,7 +237,6 @@ set(msg_files
 	VehicleTorqueSetpoint.msg
 	VelocityLimits.msg
 	WheelEncoders.msg
-	Wind.msg
 	YawEstimatorStatus.msg
 	versioned/ActuatorMotors.msg
 	versioned/ActuatorServos.msg
@@ -241,8 +245,12 @@ set(msg_files
 	versioned/ArmingCheckRequest.msg
 	versioned/BatteryStatus.msg
 	versioned/ConfigOverrides.msg
+	versioned/FixedWingLateralSetpoint.msg
+	versioned/FixedWingLongitudinalSetpoint.msg
 	versioned/GotoSetpoint.msg
 	versioned/HomePosition.msg
+	versioned/LateralControlConfiguration.msg
+	versioned/LongitudinalControlConfiguration.msg
 	versioned/ManualControlSetpoint.msg
 	versioned/ModeCompleted.msg
 	versioned/RegisterExtComponentReply.msg
@@ -262,6 +270,7 @@ set(msg_files
 	versioned/VehicleRatesSetpoint.msg
 	versioned/VehicleStatus.msg
 	versioned/VtolVehicleStatus.msg
+	versioned/Wind.msg
 )
 list(SORT msg_files)
 
