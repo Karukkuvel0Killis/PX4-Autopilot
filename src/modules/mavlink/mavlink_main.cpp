@@ -1318,6 +1318,11 @@ Mavlink::update_rate_mult()
 	/* scale up and down as the link permits */
 	float bandwidth_mult = (float)(_datarate * mavlink_ulog_streaming_rate_inv - const_rate) / rate;
 
+	/* Reduce rate while sending parameters in low bandwidth mode */
+	if (sending_parameters() && _mode == Mavlink::MAVLINK_MODE_LOW_BANDWIDTH) {
+		bandwidth_mult = fminf(bandwidth_mult, 0.25f);
+	}
+
 	/* if we do not have flow control, limit to the set data rate */
 	if (!get_flow_control_enabled()) {
 		bandwidth_mult = fminf(1.0f, bandwidth_mult);
@@ -1434,6 +1439,7 @@ Mavlink::configure_streams_to_default(const char *configure_single_stream)
 		configure_stream_local("GIMBAL_DEVICE_ATTITUDE_STATUS", 1.0f);
 		configure_stream_local("GIMBAL_DEVICE_SET_ATTITUDE", 5.0f);
 		configure_stream_local("GIMBAL_MANAGER_STATUS", 0.5f);
+		configure_stream_local("GLOBAL_POSITION", 5.0f);
 		configure_stream_local("GLOBAL_POSITION_INT", 5.0f);
 		configure_stream_local("GPS2_RAW", 1.0f);
 		configure_stream_local("GPS_GLOBAL_ORIGIN", 1.0f);
@@ -1766,6 +1772,7 @@ Mavlink::configure_streams_to_default(const char *configure_single_stream)
 		configure_stream_local("CURRENT_MODE", 0.5f);
 		configure_stream_local("ESTIMATOR_STATUS", 1.0f);
 		configure_stream_local("EXTENDED_SYS_STATE", 1.0f);
+		configure_stream_local("GLOBAL_POSITION", 10.0f);
 		configure_stream_local("GLOBAL_POSITION_INT", 10.0f);
 		configure_stream_local("GPS_GLOBAL_ORIGIN", 1.0f);
 		configure_stream_local("GPS2_RAW", unlimited_rate);
